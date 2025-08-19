@@ -1,0 +1,5 @@
+Orpheus TTS synthesis placeholder for: ភាសាខ្មែរមានលក្ខណៈពិសេសជាច្រើន ដែលធ្វើឱ្យវាក្លាយជាភាសាដ៏ស្រស់ស្អាត។
+Model path: models/orpheus
+Model name: canopylabs/orpheus-tts-0.1-finetune-prod
+Emotion: neutral
+Speed: 1.0

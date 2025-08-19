@@ -1,0 +1,209 @@
+# Khmer TTS Models Configuration
+# This file contains configuration settings for all TTS models used in the project
+
+models:
+  # Orpheus TTS Configuration
+  orpheus:
+    name: "orpheus"
+    enabled: true
+    description: "Llama-based Speech-LLM for high-quality, empathetic text-to-speech"
+
+    # Local Model Configuration
+    model_path: "models/orpheus"  # Path to cloned Orpheus repository
+    model_name: "canopylabs/orpheus-tts-0.1-finetune-prod"  # HuggingFace model name
+
+    # Voice Settings
+    voice_reference: null  # Path to reference audio for voice cloning
+    emotion: "neutral"  # Available: neutral, happy, sad, angry, surprised, etc.
+    speed: 1.0  # Speech speed multiplier
+
+    # Audio Output Settings
+    output_format: "wav"
+    sample_rate: 22050
+    bit_depth: 16
+
+    # Model-specific Parameters
+    parameters:
+      temperature: 0.7
+      top_p: 0.9
+      max_length: 1000
+      streaming: false  # Set to true for streaming inference
+
+    # Khmer Language Specific Settings
+    language_settings:
+      language_code: "km"
+      text_preprocessing: true
+      phoneme_mapping: false  # Set to true if phoneme mapping is available
+
+    # Alternative: API Configuration (if using hosted service)
+    api_config:
+      enabled: false  # Set to true to use API instead of local model
+      api_key: null  # Set your API key here
+      api_url: "https://api.baseten.co/models/orpheus-tts"  # Example API endpoint
+      
+  # Coqui TTS Configuration  
+  coqui:
+    name: "coqui"
+    enabled: true
+    description: "Open-source deep learning toolkit for Text-to-Speech synthesis"
+    
+    # Model Configuration
+    model_path: "models/coqui/model.pth"
+    config_path: "models/coqui/config.json"
+    vocoder_path: "models/coqui/vocoder.pth"
+    vocoder_config_path: "models/coqui/vocoder_config.json"
+    
+    # Speaker Settings
+    speaker_id: null  # Speaker ID for multi-speaker models
+    speaker_wav: null  # Path to reference audio for voice cloning
+    
+    # Audio Output Settings
+    output_format: "wav"
+    sample_rate: 22050
+    bit_depth: 16
+    
+    # Synthesis Parameters
+    parameters:
+      length_scale: 1.0
+      noise_scale: 0.667
+      noise_scale_w: 0.8
+      
+    # Language Settings
+    language_settings:
+      language_code: "km"
+      use_phonemes: false
+      text_cleaners: ["basic_cleaners"]
+      
+    # Training Configuration (for future fine-tuning)
+    training:
+      batch_size: 32
+      learning_rate: 0.0001
+      epochs: 1000
+      checkpoint_interval: 1000
+      
+  # Edge-TTS Configuration
+  edge_tts:
+    name: "edge_tts"
+    enabled: true
+    description: "Microsoft Edge's online text-to-speech service"
+    
+    # Voice Configuration
+    # Note: Khmer voices may not be available, using closest alternatives
+    voice: "th-TH-PremwadeeNeural"  # Thai voice as it may handle Khmer better than English
+    voice_alternatives:
+      - "th-TH-PremwadeeNeural"  # Thai voice as potential alternative
+      - "vi-VN-HoaiMyNeural"     # Vietnamese voice
+      - "en-US-AriaNeural"       # English fallback
+      - "en-US-JennyNeural"
+      
+    # Speech Parameters
+    rate: "+0%"      # Speech rate: -100% to +200%
+    volume: "+0%"    # Volume: -100% to +100%
+    pitch: "+0Hz"    # Pitch: -100Hz to +100Hz
+    
+    # Audio Output Settings
+    output_format: "audio-24khz-48kbitrate-mono-mp3"
+    output_format_alternatives:
+      - "audio-24khz-48kbitrate-mono-mp3"
+      - "audio-16khz-32kbitrate-mono-mp3"
+      - "riff-24khz-16bit-mono-pcm"
+      
+    # Connection Settings
+    timeout: 30  # Connection timeout in seconds
+    retry_attempts: 3
+    
+    # Language Settings
+    language_settings:
+      language_code: "km"
+      fallback_language: "en"
+      
+# Global Settings
+global_settings:
+  # Output Directory Configuration
+  output_directory: "results/audio_outputs"
+  temp_directory: "results/temp"
+  
+  # Audio Processing
+  normalize_audio: true
+  target_lufs: -23.0
+  
+  # Batch Processing
+  batch_size: 10
+  parallel_processing: false
+  max_workers: 4
+  
+  # Logging
+  log_level: "INFO"
+  log_file: "results/logs/tts_inference.log"
+  
+  # Performance
+  gpu_acceleration: false  # Set to true if GPU is available
+  memory_limit: "4GB"
+  
+# Evaluation Settings
+evaluation:
+  metrics:
+    - "audio_quality"
+    - "naturalness" 
+    - "intelligibility"
+    - "prosody"
+    
+  audio_quality_metrics:
+    - "rms_energy"
+    - "spectral_centroid"
+    - "zero_crossing_rate"
+    - "mfcc"
+    
+  naturalness_metrics:
+    - "f0_variation"
+    - "rhythm_regularity"
+    - "speech_rate"
+    
+  # Reference Audio (for comparison)
+  reference_audio_dir: "data/raw/audio_samples"
+  
+# Khmer Language Specific Configuration
+khmer_language:
+  # Unicode Range
+  unicode_range:
+    start: 0x1780
+    end: 0x17FF
+    
+  # Text Processing
+  text_processing:
+    remove_diacritics: false
+    normalize_spaces: true
+    handle_punctuation: true
+    
+  # Phonetic Considerations
+  phonetics:
+    vowel_length_distinction: true
+    tone_marking: false  # Khmer doesn't use tones like Vietnamese/Thai
+    consonant_clusters: true
+    
+  # Common Issues
+  known_issues:
+    - "Limited training data availability"
+    - "Complex script (abugida) handling"
+    - "Lack of word boundaries"
+    - "Pronunciation variations"
+    
+# Model Comparison Settings
+comparison:
+  # Metrics for model comparison
+  primary_metrics:
+    - "naturalness_score"
+    - "intelligibility_score"
+    - "audio_quality_score"
+    
+  # Weighting for overall score calculation
+  metric_weights:
+    naturalness: 0.4
+    intelligibility: 0.4
+    audio_quality: 0.2
+    
+  # Benchmark texts for consistent evaluation
+  benchmark_texts:
+    - "សួស្តី! នេះជាការសាកល្បងសម្រាប់ប្រព័ន្ធបំលែងអត្ថបទទៅជាសំឡេង។"
+    - "ប្រទេសកម្ពុជាមានវប្បធម៌ដ៏សម្បូរបែប និងប្រវត្តិសាស្ត្រយ៉ាងយូរលង់។"
+    - "បច្ចេកវិទ្យាថ្មីៗកំពុងផ្លាស់ប្តូរជីវិតរបស់យើងគ្រប់ៗថ្ងៃ។"

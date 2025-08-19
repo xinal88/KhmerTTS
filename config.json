@@ -1,0 +1,49 @@
+{
+  "datasets": {
+    "khmer": {
+      "path": "data/km_kh_male",
+      "format": "tsv",
+      "language": "km",
+      "description": "Khmer male voice dataset"
+    },
+    "vietnamese": {
+      "path": "data/fosd_vietnamese",
+      "format": "auto",
+      "language": "vi",
+      "description": "FOSD Vietnamese speech dataset"
+    }
+  },
+  "training": {
+    "model": "vits",
+    "languages": ["km", "vi"],
+    "output_path": "models/multilang_vits_trained",
+    "batch_size": 32,
+    "num_epochs": 1000,
+    "learning_rate": 0.0002,
+    "save_every": 50,
+    "eval_every": 25,
+    "max_audio_length": 10.0,
+    "min_audio_length": 1.0,
+    "use_phonemes": false,
+    "mixed_precision": true
+  },
+  "gpu": {
+    "enabled": true,
+    "mixed_precision": true,
+    "optimize_batch_size": true
+  },
+  "audio": {
+    "sample_rate": 22050,
+    "trim_silence": true,
+    "normalize": true
+  },
+  "logging": {
+    "level": "INFO",
+    "save_logs": true,
+    "log_dir": "logs"
+  },
+  "plugins": {
+    "directory": "plugins",
+    "auto_load": true
+  }
+}

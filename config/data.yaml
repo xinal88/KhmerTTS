@@ -1,0 +1,290 @@
+# Khmer TTS Data Configuration
+# This file contains configuration settings for data processing and management
+
+# Data Paths Configuration
+paths:
+  # Raw Data
+  raw_data_path: "data/raw"
+  raw_corpus_file: "data/raw/khmer_text_corpus.txt"
+  raw_audio_samples: "data/raw/audio_samples"
+  
+  # Processed Data
+  processed_data_path: "data/processed"
+  processed_corpus_file: "data/processed/processed_corpus.txt"
+  
+  # Interim Data (temporary processing files)
+  interim_data_path: "data/interim"
+  
+  # Output Paths
+  output_path: "results/audio_outputs"
+  evaluation_path: "results/evaluation_reports"
+  logs_path: "results/logs"
+
+# Data Processing Configuration
+processing:
+  # Text Processing
+  text_processing:
+    # Encoding settings
+    input_encoding: "utf-8"
+    output_encoding: "utf-8"
+    
+    # Cleaning options
+    remove_extra_whitespace: true
+    normalize_punctuation: true
+    remove_non_khmer_chars: true
+    preserve_punctuation: [",", ".", "!", "?", ";", ":", "-", "(", ")", "[", "]", "\""]
+    
+    # Sentence segmentation
+    sentence_separators: [".", "!", "?", "។"]  # Including Khmer sentence separator
+    min_sentence_length: 10
+    max_sentence_length: 500
+    
+    # Text validation
+    validate_khmer_content: true
+    min_khmer_ratio: 0.7  # Minimum ratio of Khmer characters in text
+    
+  # Audio Processing
+  audio_processing:
+    # Audio format settings
+    target_sample_rate: 22050
+    target_format: "wav"
+    target_bit_depth: 16
+    target_channels: 1  # Mono
+    
+    # Audio quality
+    normalize_audio: true
+    target_lufs: -23.0
+    remove_silence: true
+    silence_threshold: -40  # dB
+    
+    # Duration constraints
+    min_duration: 0.5  # seconds
+    max_duration: 30.0  # seconds
+
+# Dataset Configuration
+dataset:
+  # Data splits
+  splits:
+    train_ratio: 0.8
+    validation_ratio: 0.1
+    test_ratio: 0.1
+    
+  # Stratification (if applicable)
+  stratify_by:
+    - "sentence_length"
+    - "complexity_score"
+    
+  # Sampling
+  random_seed: 42
+  shuffle_data: true
+  
+  # Quality filters
+  quality_filters:
+    min_words_per_sentence: 3
+    max_words_per_sentence: 50
+    exclude_numbers: false
+    exclude_foreign_words: false
+    exclude_proper_nouns: false
+
+# Khmer Language Specific Settings
+khmer_language:
+  # Unicode Configuration
+  unicode_range:
+    start: 0x1780  # ក
+    end: 0x17FF    # ៿
+    
+  # Character Categories
+  character_categories:
+    consonants:
+      start: 0x1780  # ក
+      end: 0x17A2    # អ
+      
+    vowels:
+      dependent_vowels:
+        start: 0x17B6  # ា
+        end: 0x17C5    # ៅ
+      independent_vowels:
+        start: 0x17A5  # ឥ
+        end: 0x17B3    # ឳ
+        
+    diacritics:
+      start: 0x17C6  # ំ
+      end: 0x17D3    # ៓
+      
+    symbols:
+      start: 0x17D4  # ។
+      end: 0x17FF    # ៿
+  
+  # Text Processing Rules
+  text_rules:
+    # Normalization
+    normalize_zero_width_chars: true
+    normalize_combining_marks: true
+    
+    # Word boundaries (Khmer doesn't use spaces between words)
+    word_boundary_detection: false
+    use_dictionary_segmentation: false  # Set to true if dictionary is available
+    
+    # Punctuation handling
+    preserve_khmer_punctuation: true
+    convert_latin_punctuation: true
+    
+  # Common Text Patterns
+  text_patterns:
+    # Numbers in Khmer
+    khmer_digits: ["០", "១", "២", "៣", "៤", "៥", "៦", "៧", "៨", "៩"]
+    
+    # Common abbreviations
+    abbreviations:
+      - "ក.ស."  # Example abbreviation
+      - "ម.ក."  # Example abbreviation
+      
+    # Foreign word markers
+    foreign_word_indicators: ["(", ")", "[", "]"]
+
+# Data Validation Configuration
+validation:
+  # File validation
+  file_validation:
+    check_encoding: true
+    check_file_size: true
+    max_file_size: "100MB"
+    
+  # Content validation
+  content_validation:
+    check_khmer_content: true
+    min_khmer_percentage: 70
+    check_sentence_structure: true
+    validate_unicode_range: true
+    
+  # Quality checks
+  quality_checks:
+    check_duplicates: true
+    check_empty_lines: true
+    check_malformed_text: true
+    check_encoding_errors: true
+    
+  # Reporting
+  validation_report:
+    generate_report: true
+    report_format: "json"
+    include_statistics: true
+    include_samples: true
+
+# Corpus Statistics Configuration
+statistics:
+  # Text statistics to calculate
+  text_stats:
+    - "total_sentences"
+    - "total_words"
+    - "total_characters"
+    - "khmer_characters"
+    - "average_sentence_length"
+    - "vocabulary_size"
+    - "character_frequency"
+    
+  # Audio statistics (if audio data is available)
+  audio_stats:
+    - "total_duration"
+    - "average_duration"
+    - "sample_rate_distribution"
+    - "format_distribution"
+    
+  # Export options
+  export_stats:
+    format: "json"
+    include_charts: false
+    save_to_file: true
+
+# Data Augmentation Configuration (for future use)
+augmentation:
+  # Text augmentation
+  text_augmentation:
+    enabled: false
+    methods:
+      - "synonym_replacement"
+      - "sentence_reordering"
+      - "back_translation"
+    
+  # Audio augmentation (if audio data is available)
+  audio_augmentation:
+    enabled: false
+    methods:
+      - "speed_perturbation"
+      - "pitch_shifting"
+      - "noise_addition"
+      - "reverb_addition"
+
+# External Data Sources Configuration
+external_sources:
+  # Online corpora
+  online_corpora:
+    enabled: false
+    sources: []
+    
+  # APIs for additional data
+  apis:
+    enabled: false
+    sources: []
+    
+  # Crawling configuration
+  web_crawling:
+    enabled: false
+    domains: []
+    respect_robots_txt: true
+
+# Backup and Versioning
+backup:
+  # Automatic backup
+  auto_backup: true
+  backup_frequency: "daily"
+  backup_location: "backups/"
+  
+  # Version control
+  version_control:
+    enabled: true
+    track_changes: true
+    commit_frequency: "after_processing"
+    
+  # Retention policy
+  retention:
+    keep_backups: 30  # days
+    compress_old_backups: true
+
+# Performance Configuration
+performance:
+  # Memory management
+  memory:
+    chunk_size: 1000  # Process data in chunks
+    max_memory_usage: "2GB"
+    
+  # Parallel processing
+  parallel:
+    enabled: false
+    max_workers: 4
+    
+  # Caching
+  caching:
+    enabled: true
+    cache_location: "data/interim/cache"
+    cache_expiry: 7  # days
+
+# Logging Configuration
+logging:
+  # Log levels
+  level: "INFO"
+  
+  # Log files
+  files:
+    data_processing: "results/logs/data_processing.log"
+    validation: "results/logs/validation.log"
+    statistics: "results/logs/statistics.log"
+    
+  # Log format
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  
+  # Rotation
+  rotation:
+    enabled: true
+    max_size: "10MB"
+    backup_count: 5

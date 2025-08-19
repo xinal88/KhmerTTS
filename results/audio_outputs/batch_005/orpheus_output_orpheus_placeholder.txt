@@ -1,0 +1,5 @@
+Orpheus TTS synthesis placeholder for: ការអប់រំជាមូលដ្ឋានសំខាន់សម្រាប់ការអភិវឌ្ឍន៍ប្រទេសជាតិ។
+Model path: models/orpheus
+Model name: canopylabs/orpheus-tts-0.1-finetune-prod
+Emotion: neutral
+Speed: 1.0

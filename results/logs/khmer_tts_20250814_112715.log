@@ -1,0 +1,11 @@
+2025-08-14 11:27:15,833 - __main__ - INFO - Logging initialized. Log file: results\logs\khmer_tts_20250814_112715.log
+2025-08-14 11:27:20,940 - __main__ - WARNING - Missing optional packages: ['edge_tts', 'tensorflow']
+2025-08-14 11:27:20,941 - __main__ - WARNING - Some TTS models may not be available.
+2025-08-14 11:27:20,942 - __main__ - INFO - Dependency check completed successfully.
+2025-08-14 11:27:20,942 - __main__ - INFO - Starting model inference...
+2025-08-14 11:27:20,953 - __main__ - WARNING - No test texts available. Using default examples.
+2025-08-14 11:27:20,953 - __main__ - INFO - Running inference with models: ['orpheus']
+2025-08-14 11:27:20,953 - __main__ - INFO - Processing 5 test texts...
+2025-08-14 11:27:20,985 - __main__ - INFO - orpheus: 5/5 successful
+2025-08-14 11:27:20,986 - __main__ - INFO - Model inference completed successfully!
+2025-08-14 11:27:20,986 - __main__ - INFO - Pipeline completed successfully!
