@@ -5,17 +5,11 @@
       "format": "tsv",
       "language": "km",
       "description": "Khmer male voice dataset"
-    },
-    "vietnamese": {
-      "path": "data/fosd_vietnamese",
-      "format": "auto",
-      "language": "vi",
-      "description": "FOSD Vietnamese speech dataset"
     }
   },
   "training": {
     "model": "vits",
-    "languages": ["km", "vi"],
+    "languages": ["km"],
     "output_path": "models/multilang_vits_trained",
     "batch_size": 32,
     "num_epochs": 1000,

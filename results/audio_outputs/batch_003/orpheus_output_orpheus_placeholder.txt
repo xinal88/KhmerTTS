@@ -1,5 +1,0 @@
-Orpheus TTS synthesis placeholder for: បច្ចេកវិទ្យាថ្មីៗកំពុងផ្លាស់ប្តូរជីវិតរបស់យើងគ្រប់ៗថ្ងៃ។
-Model path: models/orpheus
-Model name: canopylabs/orpheus-tts-0.1-finetune-prod
-Emotion: neutral
-Speed: 1.0

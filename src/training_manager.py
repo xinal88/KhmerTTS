@@ -39,16 +39,11 @@ class TTSTrainingManager:
                     "path": "data/km_kh_male",
                     "format": "tsv",
                     "language": "km"
-                },
-                "vietnamese": {
-                    "path": "data/fosd_vietnamese", 
-                    "format": "auto",
-                    "language": "vi"
                 }
             },
             "training": {
                 "model": "vits",
-                "languages": ["km", "vi"],
+                "languages": ["km"],
                 "output_path": "models/multilang_trained",
                 "batch_size": 32,
                 "num_epochs": 1000,

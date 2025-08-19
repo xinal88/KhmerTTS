@@ -134,7 +134,7 @@ class VITSTrainer(BaseTTSTrainer):
                         text = self.clean_text(row['transcription'], "km")
                         if text:
                             samples.append({
-                                'audio_file': str(audio_file.relative_to(Path.cwd())),
+                                'audio_file': str(audio_file),
                                 'text': text,
                                 'speaker_name': 'khmer_male_01',
                                 'language': 'km',
@@ -193,7 +193,8 @@ class VITSTrainer(BaseTTSTrainer):
                 "path": "data/processed/vits_multilang/",
                 "meta_file_train": "metadata_train.txt",
                 "meta_file_val": "metadata_val.txt",
-                "language": "multilang"
+                "language": "multilang",
+                "formatter": "coqui"  # Use the built-in coqui formatter
             }],
             
             # Audio configuration

@@ -93,7 +93,7 @@ class CoquiKhmerTrainer:
                         text = self._clean_text(row['transcription'])
                         if text:  # Only add if text is not empty after cleaning
                             valid_samples.append({
-                                'audio_file': str(audio_file.relative_to(Path.cwd())),
+                                'audio_file': str(audio_file),
                                 'text': text,
                                 'speaker_name': self.config['speaker_name'],
                                 'language': self.config['language'],
@@ -203,7 +203,8 @@ class CoquiKhmerTrainer:
                 "path": "data/processed/coqui_khmer/",
                 "meta_file_train": "metadata_train.txt",
                 "meta_file_val": "metadata_val.txt",
-                "language": "km"
+                "language": "km",
+                "formatter": "coqui"  # Use the built-in coqui formatter
             }],
             
             # Audio configuration
@@ -338,7 +339,7 @@ echo "Test synthesis completed! Check {self.output_path}/test_output.wav"
 '''
         
         script_file = self.output_path / "train_coqui_khmer.sh"
-        with open(script_file, 'w') as f:
+        with open(script_file, 'w', encoding='utf-8') as f:
             f.write(script_content)
         
         # Make executable

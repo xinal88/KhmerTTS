@@ -1,5 +1,0 @@
-Orpheus TTS synthesis placeholder for: ប្រទេសកម្ពុជាមានវប្បធម៌ដ៏សម្បូរបែប និងប្រវត្តិសាស្ត្រយ៉ាងយូរលង់។
-Model path: models/orpheus
-Model name: canopylabs/orpheus-tts-0.1-finetune-prod
-Emotion: neutral
-Speed: 1.0
