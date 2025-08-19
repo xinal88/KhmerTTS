@@ -12,7 +12,7 @@ This guide focuses specifically on training TTS models with the **Khmer dataset*
 
 ---
 
-## 🚀 Quick Start (5 Minutes)
+## 🚀 Quick Start (10 Minutes)
 
 ### Step 1: Install Dependencies
 ```bash
@@ -26,20 +26,32 @@ pip install TTS
 pip install librosa soundfile
 ```
 
-### Step 2: Verify Setup
+### Step 2: Setup Dataset (IMPORTANT!)
 ```bash
-# Check if everything is working
-python train.py --list-models
+# The repository doesn't include the dataset (to keep it lightweight)
+# Follow the dataset setup guide:
+```
+📋 **READ FIRST**: [DATASET_SETUP.md](DATASET_SETUP.md) - **Required before training!**
+
+**Quick dataset setup:**
+1. Create directory: `data/km_kh_male/wavs/`
+2. Add your audio files (.wav) to the `wavs/` folder
+3. Create `data/km_kh_male/line_index.tsv` with metadata
+4. Run verification: `python verify_khmer_setup.py`
+
+### Step 3: Verify Setup
+```bash
+# Check if everything is working (including dataset)
+python verify_khmer_setup.py
 ```
 **Expected Output:**
 ```
-🎯 Available TTS Models:
-📦 VITS - High quality, medium speed
-📦 ORPHEUS - Very high quality, slow speed  
-📦 STYLETTS - Very high quality, medium speed
+🇰🇭 Khmer dataset...
+   ✅ Metadata file: XXXX samples
+   ✅ Audio files: XXXX WAV files
 ```
 
-### Step 3: Start Training
+### Step 4: Start Training
 ```bash
 # Train VITS model (recommended for beginners)
 python train.py --model vits

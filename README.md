@@ -54,13 +54,14 @@ The Khmer TTS project addresses the challenge of generating high-quality speech 
 - Python 3.8 or higher
 - pip package manager
 - Internet connection (for some TTS models)
+- **Khmer dataset** (see setup guide below)
 
 ### Installation
 
 1. **Clone the repository**:
    ```bash
-   git clone <repository-url>
-   cd khmer-tts
+   git clone https://github.com/xinal88/KhmerTTS
+   cd KhmerTTS
    ```
 
 2. **Create virtual environment** (recommended):
@@ -72,18 +73,24 @@ The Khmer TTS project addresses the challenge of generating high-quality speech 
 3. **Install dependencies**:
    ```bash
    pip install -r requirements.txt
+   pip install TTS  # For actual training
    ```
 
-4. **Install optional dependencies** (choose based on your needs):
+4. **Setup Dataset (REQUIRED)**:
+
+   📋 **IMPORTANT**: This repository doesn't include the dataset to keep it lightweight.
+
+   **Follow the dataset setup guide**: [DATASET_SETUP.md](DATASET_SETUP.md)
+
+   **Quick setup:**
+   - Create `data/km_kh_male/wavs/` directory
+   - Add your Khmer audio files (.wav)
+   - Create `data/km_kh_male/line_index.tsv` metadata file
+   - Run `python verify_khmer_setup.py` to verify
+
+5. **Verify setup**:
    ```bash
-   # For Coqui TTS
-   pip install -r requirements.txt[coqui]
-   
-   # For Jupyter notebooks
-   pip install -r requirements.txt[notebooks]
-   
-   # For development
-   pip install -r requirements.txt[dev]
+   python verify_khmer_setup.py
    ```
 
 ### Basic Usage

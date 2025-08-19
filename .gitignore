@@ -51,7 +51,15 @@ logs/
 # Datasets (too large for git)
 data/*/
 !data/.gitkeep
-!data/km_kh_male/line_index.tsv
+!data/km_kh_male/
+!data/km_kh_male/README.md
+!data/km_kh_male/line_index_EXAMPLE.tsv
+!data/km_kh_male/wavs/
+# Exclude actual dataset files
+data/km_kh_male/line_index.tsv
+data/km_kh_male/wavs/*.wav
+data/km_kh_male/wavs/*.mp3
+data/km_kh_male/wavs/*.flac
 
 # Model checkpoints
 *.pth

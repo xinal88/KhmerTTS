@@ -58,21 +58,25 @@ def check_dependencies():
 def check_dataset():
     """Check Khmer dataset."""
     print("\n🇰🇭 Checking Khmer dataset...")
-    
+
     dataset_path = Path("data/km_kh_male")
     metadata_file = dataset_path / "line_index.tsv"
     audio_dir = dataset_path / "wavs"
-    
+
     if not dataset_path.exists():
-        print(f"   ❌ Dataset directory not found: {dataset_path}")
+        print(f"   ⚠️  Dataset directory not found: {dataset_path}")
+        print("   📋 Please follow DATASET_SETUP.md to add your dataset")
+        print("   💡 The repository doesn't include the dataset to keep it lightweight")
         return False
-    
+
     if not metadata_file.exists():
         print(f"   ❌ Metadata file not found: {metadata_file}")
+        print("   📋 Please create line_index.tsv following DATASET_SETUP.md")
         return False
-    
+
     if not audio_dir.exists():
         print(f"   ❌ Audio directory not found: {audio_dir}")
+        print("   📋 Please create wavs/ directory and add your audio files")
         return False
     
     # Check metadata
